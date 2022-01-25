@@ -1,0 +1,22 @@
+body {
+    background-image: url(/asset/img/mesa/mesa1.jpg);
+    color: white;
+    font-family: 'Anton', sans-serif;
+}
+
+.title {
+    background-color: rgba(0, 0, 0, 0.733);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 28px;
+}
+
+.score {
+    border: 2px solid white;
+    border-radius: 10px;
+    font-size: 25px;
+    margin: 0 auto;
+    padding: 10px;
+    width: 280px;
+}
