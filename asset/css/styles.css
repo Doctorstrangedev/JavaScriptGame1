@@ -20,3 +20,9 @@ body {
     padding: 10px;
     width: 280px;
 }
+
+.img-card {
+    position: relative;
+    left: 80px;
+    width: 150px;
+}
