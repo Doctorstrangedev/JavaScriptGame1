@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <!-- Nuestro css -->
-    <link rel="stylesheet" href="/asset/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
     <title>Juego de Cartas</title>
 </head>
 
@@ -55,20 +55,28 @@
     <div class="container">
         <div class="row">
             <div id="divButtons" class="col text-center">
-                <button id="btnNewGame" class="btn btn-primary btn-lg">New Game</button>
-                <button id="btnGetCard" class="btn btn-warning btn-lg">Get Card</button>
-                <button id="btnStopTurn" class="btn btn-danger btn-lg">Stop</button>
+                <button id="btnNewGame" class="btn btn-primary btn-lg">
+                New Game
+            </button>
+
+                <button id="btnGetCard" class="btn btn-warning btn-lg" disabled="true">
+                Get Card
+            </button>
+                <button id="btnStopTurn" class="btn btn-danger btn-lg" disabled="true">
+                 Stop
+                </button>
+
             </div>
         </div>
     </div>
 
 
     <!-- underscore -->
-    <script src="/asset/js/underscore-umd-min.js"></script>
+    <script src="/assets/js/underscore-umd-min.js"></script>
 
     <!-- sweet alert 2 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="asset/js/game.js"></script>
+    <script src="assets/js/game.js"></script>
 </body>
 
 </html>

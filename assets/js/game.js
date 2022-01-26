@@ -15,6 +15,7 @@
     const specials = ['A', 'J', 'Q', 'K'];
 
     //Score de los jugadores
+    //el jugador 0 somos nosotros y el jugador 1 es la computadora
     let scorePlayers = [];
 
     /*--- REFERENCIAS AL DOM  ---*/
@@ -34,18 +35,25 @@
     //iniciar el juego
     const startGame = (numPlayer = 2) => {
 
-        //cada nuevo juego se reinician los pts
-        console.log('HORA DE COMENZAR EL JUEGO');
+
         //crear baraja
         deckOfCards = createDeck();
         console.log(deckOfCards);
-        //el puntaje de los jugadores
+
+        //cada nuevo juego se reinician los pts
         scorePlayers = [];
         for (let i = 0; i < numPlayer; i++) {
             scorePlayers.push(0);
         }
-        console.log(scorePlayers);
 
+        //resetear los puntajes de los jugadores
+        //LIMPIAR EL AREA DEL JUEGO
+        scoreHtml.forEach(element => element.innerText = 0);
+        divCardPlayer.forEach(element => element.innerHTML = '');
+
+        //habilitar los botones
+        getBtnCard.disabled = false;
+        stopBtnTurn.disabled = false;
     };
 
     //Crear la baraja
@@ -56,18 +64,25 @@
                 deckOfCards.push(i + type)
             }
         }
+
+
+
         for (let type of types) {
             for (let special of specials) {
                 deckOfCards.push(special + type)
             }
         }
-        console.log(deckOfCards);
+
         return _.shuffle(deckOfCards);
     };
 
     //Obrener una carta
     const getOneCard = () => {
-
+        if (deckOfCards.length === 0) {
+            throw 'The deck is empty';
+        }
+        //el pop elimina el ultimo elemento y me devuelve el elemento eliminado
+        return deckOfCards.pop();
     };
 
     //Valor de la carta
@@ -81,8 +96,14 @@
     };
 
     //Crear carta para mostrarla en DOM
-    const createCard = () => {
-
+    //obtener carta a crear y el turno del jugador 0 o1
+    //nosotros somos 0 y el computador es 1
+    const createCard = (card, turn) => {
+        const imgCard = document.createElement('img');
+        // <img src="/asset/img/10C.png" alt="card"> </img>
+        imgCard.src = `assets/img/cartas/${card}.png`;
+        imgCard.classList.add('img-card');
+        divCardPlayer[turn].append(imgCard);
     };
 
     //Determinar un ganador
@@ -101,6 +122,11 @@
         startGame();
     });
 
+    getBtnCard.addEventListener('click', () => {
+        const card = getOneCard();
+        //vamos a enviar el jugador y la carta para que sea creada
+        createCard(card, 0);
+    });
 
 
 
