@@ -25,4 +25,9 @@ body {
     position: relative;
     left: 80px;
     width: 150px;
+    margin-right: 10px;
+}
+
+.divCards {
+    height: 240px;
 }
