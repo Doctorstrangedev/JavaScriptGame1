@@ -38,7 +38,7 @@
         console.log('HORA DE COMENZAR EL JUEGO');
         //crear baraja
         deckOfCards = createDeck();
-
+        console.log(deckOfCards);
         //el puntaje de los jugadores
         scorePlayers = [];
         for (let i = 0; i < numPlayer; i++) {
