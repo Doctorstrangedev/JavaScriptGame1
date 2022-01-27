@@ -16,7 +16,7 @@
 
     //Score de los jugadores
     //el jugador 0 somos nosotros y el jugador 1 es la computadora
-    let scorePlayers = [];
+    let scorePlayers = []; //[0,0]
 
     /*--- REFERENCIAS AL DOM  ---*/
 
@@ -38,7 +38,7 @@
 
         //crear baraja
         deckOfCards = createDeck();
-        console.log(deckOfCards);
+
 
         //cada nuevo juego se reinician los pts
         scorePlayers = [];
@@ -90,12 +90,16 @@
     //ejemplo:2D se puede acceder asi [2,D] indices: 2 = 0; D = 1;
     const valueCard = (card) => {
         const value = card.substring(0, card.length - 1);
-        return value;
+
+        return (isNaN(value) ? (value === 'A') ? 11 : 10 : value * 1);
     };
 
     //Contador de puntaje
-    const countScore = (card) => {
-        console.log(valueCard(card));
+    const countScore = (card, turn) => {
+        scorePlayers[turn] += valueCard(card);
+        //scorePlayers[turn] = scorePlayers[turn] + valueCard(card);
+        scoreHtml[turn].innerText = scorePlayers[turn];
+        return scorePlayers[turn];
 
     };
 
@@ -114,25 +118,71 @@
 
     //Determinar un ganador
     const winnerPlayer = () => {
-
+        //score players, pts jugador y compu
+        const [scorePlayer, scoreComputer] = scorePlayers;
+        if (scoreComputer === scorePlayer) {
+            Swal.fire({
+                title: 'Victoria',
+            });
+        } else if (scorePlayer > 21) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Derrota',
+                texto: 'Perdiste, el computador Gana'
+            });
+        } else if (scoreComputer > 21) {
+            Swal.fire({
+                title: 'Victoria',
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Derrota',
+                texto: 'Perdiste, el computador Gana'
+            });
+        }
     };
 
     //Turno para la Computadora
-    const turnComputer = () => {
+    //minScore sera el puntaje que obtuvo el player 0 
+    const turnComputer = (minScore) => {
+        let scoreComputer = 0;
+        do {
+            const card = getOneCard();
+            scoreComputer = countScore(card, scorePlayers.length - 1);
+            createCard(card, scorePlayers.length - 1);
 
+        } while ((scoreComputer < minScore) && (minScore <= 21))
     };
 
     /* LOS EVENTOS DE LOS BOTONES */
-
+    //creamios juego
     newBtnGame.addEventListener('click', () => {
         startGame();
     });
-
+    //obtenemos carta
     getBtnCard.addEventListener('click', () => {
         const card = getOneCard();
-        countScore(card);
         //vamos a enviar el jugador y la carta para que sea creada
+        const scorePlayer = countScore(card, 0);
         createCard(card, 0);
+        if (scorePlayer > 21) {
+            getBtnCard.disabled = true;
+            stopBtnTurn.disabled = true;
+            //turno de la maquina
+            turnComputer(scorePlayer);
+        } else if (scorePlayer === 21) {
+            getBtnCard.disabled = true;
+            stopBtnTurn.disabled = true;
+            //turno de la maquina
+            turnComputer(scorePlayer);
+        }
+        //Stop, turno de la compu
+        stopBtnTurn.addEventListener('click', () => {
+            getBtnCard.disabled = true;
+            stopBtnTurn.disabled = true;
+            turnComputer(scorePlayers[0])
+        })
     });
 
 

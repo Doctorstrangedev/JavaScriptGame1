@@ -31,3 +31,9 @@ body {
 .divCards {
     height: 240px;
 }
+
+small {
+    margin-left: 10px;
+    font-size: 26px;
+    font-weight: 600;
+}
