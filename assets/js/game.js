@@ -122,7 +122,7 @@
         const [scorePlayer, scoreComputer] = scorePlayers;
         if (scoreComputer === scorePlayer) {
             Swal.fire({
-                title: 'Victoria',
+                title: 'Empate',
             });
         } else if (scorePlayer > 21) {
             Swal.fire({
@@ -153,6 +153,7 @@
             createCard(card, scorePlayers.length - 1);
 
         } while ((scoreComputer < minScore) && (minScore <= 21))
+        winnerPlayer();
     };
 
     /* LOS EVENTOS DE LOS BOTONES */
