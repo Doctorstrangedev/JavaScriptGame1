@@ -178,15 +178,15 @@
             //turno de la maquina
             turnComputer(scorePlayer);
         }
-        //Stop, turno de la compu
-        stopBtnTurn.addEventListener('click', () => {
-            getBtnCard.disabled = true;
-            stopBtnTurn.disabled = true;
-            turnComputer(scorePlayers[0])
-        })
+
+
     });
-
-
+    //Stop, turno de la compu
+    stopBtnTurn.addEventListener('click', () => {
+        getBtnCard.disabled = true;
+        stopBtnTurn.disabled = true;
+        turnComputer(scorePlayers[0])
+    });
 
 
 })();
