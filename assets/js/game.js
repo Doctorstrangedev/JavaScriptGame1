@@ -86,12 +86,16 @@
     };
 
     //Valor de la carta
-    const valueCard = () => {
-
+    //en js los strings se pueden acceder como si fueran un arreglo
+    //ejemplo:2D se puede acceder asi [2,D] indices: 2 = 0; D = 1;
+    const valueCard = (card) => {
+        const value = card.substring(0, card.length - 1);
+        return value;
     };
 
     //Contador de puntaje
-    const countScore = () => {
+    const countScore = (card) => {
+        console.log(valueCard(card));
 
     };
 
@@ -100,9 +104,11 @@
     //nosotros somos 0 y el computador es 1
     const createCard = (card, turn) => {
         const imgCard = document.createElement('img');
-        // <img src="/asset/img/10C.png" alt="card"> </img>
+        // <img src=""> </img>
         imgCard.src = `assets/img/cartas/${card}.png`;
-        imgCard.classList.add('img-card');
+        // <img src="assets/img/cartas/ejemplo.png"> </img>
+        imgCard.classList.add('img-card', 'animate__animated', 'animate__fadeInRight');
+        // <img src="assets/img/cartas/ejemplo.png class="img-card animate__animated animate__fadeInRight"> </img>
         divCardPlayer[turn].append(imgCard);
     };
 
@@ -124,6 +130,7 @@
 
     getBtnCard.addEventListener('click', () => {
         const card = getOneCard();
+        countScore(card);
         //vamos a enviar el jugador y la carta para que sea creada
         createCard(card, 0);
     });
